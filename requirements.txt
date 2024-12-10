@@ -1,0 +1,17 @@
+openai
+pyodbc
+matplotlib
+spacy
+streamlit
+python-dotenv
+requests
+networkx
+numpy
+plotly
+qdrant-client
+uuid
+fastapi[standard]
+uvicorn
+pydantic
+fuzzywuzzy[speedup]
+PyPDF2

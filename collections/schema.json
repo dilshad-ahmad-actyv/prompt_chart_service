@@ -1,0 +1,42 @@
+[
+  {
+    "prompt": "What are the details of all users?",
+    "ms_sql": "SELECT * FROM EpiUsers;"
+  },
+  {
+    "prompt": "Which GenieBots are currently disconnected?",
+    "ms_sql": "SELECT * FROM GenieBots WHERE Health = 'Disconnected';"
+  },
+  {
+    "prompt": "What is the status of all GenieJobs?",
+    "ms_sql": "SELECT Name, Status FROM GenieJobs;"
+  },
+  {
+    "prompt": "Which GenieJob execution resulted in errors?",
+    "ms_sql": "SELECT * FROM GenieJobExecutionDetails WHERE Status = 'ProjectExecutionError';"
+  },
+  {
+    "prompt": "List all manual activities and their maximum activity time.",
+    "ms_sql": "SELECT Name, ActivityMaxTime FROM ManualActivities;"
+  },
+  {
+    "prompt": "What are the RPA User Groups and their associated users?",
+    "ms_sql": "SELECT * FROM EpiUserRPAUserGroupMap;"
+  },
+  {
+    "prompt": "Which users belong to the 'Gold Star' project?",
+    "ms_sql": "SELECT EpiUsers.FirstName, EpiUsers.LastName FROM EpiUsers INNER JOIN EpiProjectUser ON EpiUsers.Id = EpiProjectUser.EpiUserId INNER JOIN EpiProjects ON EpiProjectUser.ProjectId = EpiProjects.ProjectId WHERE EpiProjects.Name = 'Gold Star';"
+  },
+  {
+    "prompt": "List all applications marked as browsers.",
+    "ms_sql": "SELECT * FROM ApplicationTypes WHERE IsBrowser = 1;"
+  },
+  {
+    "prompt": "What are the details of all Capture Jobs?",
+    "ms_sql": "SELECT * FROM CaptureJobs;"
+  },
+  {
+    "prompt": "Which users have login issues recorded in the audit trail?",
+    "ms_sql": "SELECT UserName, Action, BrowserInfo FROM EpiAuditTrail WHERE Action = 'Login Failed';"
+  }
+]
