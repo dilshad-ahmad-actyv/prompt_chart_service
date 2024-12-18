@@ -45,13 +45,13 @@ async def process_prompt(prompt: Prompt):
         print('data------------>', data)
         return {
             "success": True,
-            "generated_sql": sql_query,
-            "fetched_data": data,
+            "sql_query": sql_query,
+            "data": data,
         }
     except Exception as e:
             return {"success": False, "error": str(e)}
 
-def searchPromptInPreDefinedCollection(prompt, threshold=90):
+def searchPromptInPreDefinedCollection(prompt, threshold=95):
     # Path to the schema.json file
     file_path = os.path.join(os.path.dirname(__file__), '../../collections/schema.json')
     print ("Searching...", prompt)

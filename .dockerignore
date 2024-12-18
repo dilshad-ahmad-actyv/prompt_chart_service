@@ -1,0 +1,23 @@
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.bak
+*.swp
+
+# Ignore other files you don't need in the container
+.idea/
+.vscode/
+*.md
+*.git
+.git/
