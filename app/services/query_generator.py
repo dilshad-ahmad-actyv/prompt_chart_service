@@ -65,14 +65,14 @@ def generate_sql_query(prompt, schema, entities_actions):
     #     return "Error: Could not load the schema."
 
     # # Convert schema into a string description for OpenAI (this can be customized based on your needs)
-    # schema_description = ''
-    # for table in schema:
-    #     # Extract table name and columns
-    #     table_name = table['table']
-    #     columns = table['columns']
+    schema_description = ''
+    for item in schema:
+        # Extract table name and columns
+        table_name = item
+        columns = schema[item]
 
-    #     # Add basic table and columns information
-    #     schema_description += f"Table: {table_name}, Columns: {', '.join(columns)}\n"
+        # Add basic table and columns information
+        schema_description += f"Table: {table_name}, Columns: {', '.join(columns)}\n"
 
     #     # Check if 'data' is present and process the first row for column details
     #     if 'data' in table and table['data']:
@@ -96,33 +96,33 @@ def generate_sql_query(prompt, schema, entities_actions):
     #             # Append the description for this column
     #             schema_description += f"    Column '{column}': {value_description}\n"
 
-    # print('schema_description====>', schema_description)
+    print('schema_description====>', schema_description)
     # Optimized system message
-    # system_message = (
-    #     "You are a highly skilled SQL assistant. Your task is to generate valid SQL queries for Microsoft SQL Server. "
-    #     "You will use the provided schema to identify relevant tables and columns and generate a syntactically correct query."
-    #     "Follow these guidelines:\n"
-    #     "1. Use the schema to identify tables and columns.\n"
-    #     "2. Ensure to match the exact table and column names.\n"
-    #     "3. Handle special data formats and conditions, such as ranges and derived metrics.\n"
-    #     "4. Use MS SQL Server syntax (e.g., 'TOP' instead of 'LIMIT').\n"
-    #     "5. If the request cannot be fulfilled, respond with 'The schema does not support this request.'\n"
-    #     "6. Addressing any issues or errors in previously generated queries, including syntax errors, invalid column or table names, "
-    #     "or logical inconsistencies.\n"
-
-    #     "7. End the query with a semicolon.\n\n"
-    #     "8. If the query fails, identify and fix errors based on provided error messages.\n"
-    #     f"Here is the provided schema:\n{schema_description}\n"
-    # )
-
     system_message = (
-        "You are a highly skilled SQL assistant. Generate valid SQL queries for Microsoft SQL Server based on the provided schema context. "
+        "You are a highly skilled SQL assistant. Your task is to generate valid SQL queries for Microsoft SQL Server. "
+        "You will use the provided schema to identify relevant tables and columns and generate a syntactically correct query."
         "Follow these guidelines:\n"
-        "- Use exact table and column names.\n"
-            "- Use aggregation functions (COUNT, SUM, AVG, etc.) with meaningful aliases (e.g., 'AS TotalSum', 'AS AverageValue').\n"
-        "- Use SQL Server syntax (e.g., 'TOP' instead of 'LIMIT').\n"
-        "- End every query with a semicolon.\n"
+        "1. Use the schema to identify tables and columns.\n"
+        "2. Ensure to match the exact table and column names.\n"
+        "3. Handle special data formats and conditions, such as ranges and derived metrics.\n"
+        "4. Use MS SQL Server syntax (e.g., 'TOP' instead of 'LIMIT').\n"
+        "5. If the request cannot be fulfilled, respond with 'The schema does not support this request.'\n"
+        "6. Addressing any issues or errors in previously generated queries, including syntax errors, invalid column or table names, "
+        "or logical inconsistencies.\n"
+
+        "7. End the query with a semicolon.\n\n"
+        "8. If the query fails, identify and fix errors based on provided error messages.\n"
+        f"Here is the provided schema:\n{schema_description}\n"
     )
+
+    # system_message = (
+    #     "You are a highly skilled SQL assistant. Generate valid SQL queries for Microsoft SQL Server based on the provided schema context. "
+    #     "Follow these guidelines:\n"
+    #     "- Use exact table and column names.\n"
+    #         "- Use aggregation functions (COUNT, SUM, AVG, etc.) with meaningful aliases (e.g., 'AS TotalSum', 'AS AverageValue').\n"
+    #     "- Use SQL Server syntax (e.g., 'TOP' instead of 'LIMIT').\n"
+    #     "- End every query with a semicolon.\n"
+    # )
 
     # Optimized user message
     user_message = (
@@ -150,8 +150,11 @@ def generate_sql_query(prompt, schema, entities_actions):
     # OpenAI API call to generate SQL query
     response = openai.ChatCompletion.create(
         model="gpt-4",
-        messages=[{"role": "system", "content": system_message},
-                  {"role": "user", "content": user_message}],
+        messages=[
+                {"role": "system", "content": system_message},
+                {"role": "system", "content": f"Context: \n{entities_actions}"},
+                {"role": "user", "content": user_message}
+            ],
     )
 
     query = response['choices'][0]['message']['content'].strip()

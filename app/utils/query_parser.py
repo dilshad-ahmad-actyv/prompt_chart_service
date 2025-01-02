@@ -1,5 +1,5 @@
 def extract_sql_query(response_content):
-    response_content = response_content.replace('\n', '')
+    response_content = response_content.replace('\n', ' ')
     print('response_content: ', response_content)
     sql_keywords = ['select', 'insert', 'update', 'delete', 'create', 'drop']
     response_lower = response_content.lower()
