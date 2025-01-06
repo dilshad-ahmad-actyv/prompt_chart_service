@@ -8,6 +8,8 @@ from fuzzywuzzy import fuzz
 import json
 import os
 
+from app.utils.constants import schema
+
 router = APIRouter()
 
 unresolved_file_path = os.path.join(os.path.dirname(__file__), '../../collections/unresolved_queries.json')
@@ -81,11 +83,12 @@ def searchPromptInPreDefinedCollection(prompt, threshold=95):
 
 def generateNewQuery(prompt):
     # TODO: Implement this function to generate a new SQL query based on the user's prompt
-    schema = get_database_schema()
+    # schema = get_database_schema()
     print('schema: ', schema)
     entities_actions = extract_entities_and_actions(prompt.query, schema)
     print('entities_actions: ', entities_actions)
-    sql_query = generate_sql_query(prompt.query, schema, entities_actions)
+    # sql_query = generate_sql_query(prompt.query, schema, entities_actions)
+    sql_query = generate_sql_query(prompt.query, entities_actions)
     print('sql_query: ', sql_query)
     extracted_query = extract_sql_query(sql_query)
     

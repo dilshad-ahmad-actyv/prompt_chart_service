@@ -90,5 +90,25 @@
     {
         "prompt": "what applications are used by Jai",
         "ms_sql": ""
+    },
+    {
+        "prompt": "tell me about each user's step duration time",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "tell me about each user's step duration time",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "tell me the each user's step duration time",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "tell me about each user's step duration time",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "tell me about each user's step duration time",
+        "ms_sql": ""
     }
 ]
