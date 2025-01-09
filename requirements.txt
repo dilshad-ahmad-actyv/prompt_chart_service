@@ -16,3 +16,4 @@ pydantic
 fuzzywuzzy[speedup]
 PyPDF2
 python-multipart
+boto3
