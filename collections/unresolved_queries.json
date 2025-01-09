@@ -110,5 +110,25 @@
     {
         "prompt": "tell me about each user's step duration time",
         "ms_sql": ""
+    },
+    {
+        "prompt": "list the total users",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "Total no of loginusername",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "Display the first name and last name ",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "Display the first name and last name and toatal no of users",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "who is the maximum experience ",
+        "ms_sql": ""
     }
 ]

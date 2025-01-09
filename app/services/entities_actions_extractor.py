@@ -69,9 +69,6 @@ openai.api_key = OPENAI_API_KEY
 #     response_content = response['choices'][0]['message']['content']
 #     return response_content
 
-
-import openai
-
 # Define your OpenAI API key
 openai.api_key = "your_openai_api_key"
 
