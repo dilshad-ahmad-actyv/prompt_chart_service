@@ -3,7 +3,7 @@ import logging
 from qdrant_client import QdrantClient
 from qdrant_client.models import ScoredPoint, VectorParams, Distance
 from dotenv import load_dotenv
-
+from langchain_community.embeddings import OpenAIEmbeddings
 # Load environment variables
 load_dotenv()
 
@@ -12,18 +12,19 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 
 # Validate environment variables
 QDRANT_URL = os.getenv("QDRANT_URL")
-QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+# QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
-if not QDRANT_URL or not QDRANT_API_KEY:
+if not QDRANT_URL:
     raise EnvironmentError("QDRANT_URL or QDRANT_API_KEY is not set in the environment variables.")
 
 # Configure Qdrant client
 try:
-    client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+    client = QdrantClient(url=QDRANT_URL)
+    embedding_model = OpenAIEmbeddings(model="text-embedding-ada-002")
 except Exception as e:
     raise RuntimeError(f"Failed to connect to Qdrant: {e}")
 
-def query_relevant_chunks(query, collection_name, top_k=5, embedding_model=None):
+def query_relevant_chunks(query, collection_name, top_k=5):
     """
     Queries the Qdrant database for the most relevant document chunks.
 
@@ -50,7 +51,8 @@ def query_relevant_chunks(query, collection_name, top_k=5, embedding_model=None)
         query_embedding = embedding_model.embed_query(query)
 
         # Check if the collection exists
-        if not client.get_collections().has_collection(collection_name):
+        collections = client.get_collections()
+        if not any(collection.name == collection_name for collection in collections.collections):
             raise ValueError(f"Collection '{collection_name}' does not exist in Qdrant.")
 
         # Perform the search in Qdrant

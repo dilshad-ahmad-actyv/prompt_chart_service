@@ -1,17 +1,20 @@
-# openai_service.py
-
 import openai
 from dotenv import load_dotenv
 import os
+from openai import OpenAIError, AuthenticationError, RateLimitError
 
+# Load environment variables from .env file
 load_dotenv()
 
 # Initialize OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+if not openai.api_key:
+    raise EnvironmentError("OPENAI_API_KEY is not set in the environment variables.")
+
 def generate_openai_response(prompt, relevant_chunks):
     """
-    Uses OpenAI to generate a response based on the user prompt and relevant document chunks.
+    Generate a response using OpenAI's GPT model based on the user prompt and relevant document chunks.
 
     Args:
         prompt (str): The user prompt.
@@ -20,41 +23,38 @@ def generate_openai_response(prompt, relevant_chunks):
     Returns:
         str: The generated response from OpenAI.
     """
-    # Combine relevant chunks and prompt
-    context = "\n".join([chunk["document"] for chunk in relevant_chunks])
-    # complete_prompt = f"User Query: {prompt}\n\nContext:\n{context}\n\nGenerate a concise, accurate response based on the context."
+    if not prompt or not isinstance(prompt, str):
+        raise ValueError("Prompt must be a non-empty string.")
+
+    if not relevant_chunks or not isinstance(relevant_chunks, list):
+        raise ValueError("Relevant chunks must be a non-empty list of documents.")
+
+    # Combine relevant chunks to form the context
+    context = "\n".join(chunk.get("document", "No content available") for chunk in relevant_chunks)
+
+    # Prepare the messages for OpenAI Chat API
     messages = [
-            {"role": "system", "content": "You are a knowledgeable assistant. Use the provided context to answer questions accurately."},
-            {"role": "system", "content": f"Context:\n{context}"},
-            {"role": "user", "content": prompt},
-        ]
+        {"role": "system", "content": "You are a knowledgeable assistant. Use the provided context to answer questions accurately."},
+        {"role": "system", "content": f"Context:\n{context}"},
+        {"role": "user", "content": prompt},
+    ]
+
     try:
-
-        # Create messages for GPT-4 Chat API
-
-        
-                # Call OpenAI's ChatCompletion API
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
+        # Call OpenAI's ChatCompletion API
+        response = openai.chat.completions.create(
+            model="gpt-4",  # Use the desired GPT model
             messages=messages,
-            max_tokens=200,  # Adjust max tokens based on expected output length
-            temperature=0.7,  # Balance creativity and accuracy
+            # temperature=0.7,  # Balance creativity and accuracy
         )
 
         # Extract and return the assistant's reply
-        return response["choices"][0]["message"]["content"]
-    
-        # Call OpenAI to generate the response
-        # response = openai.Completion.create(
-        #     model="text-davinci-003",
-        #     prompt=complete_prompt,
-        #     # max_tokens=150,
-        #     n=1,
-        #     stop=None,
-        #     temperature=0.7,
-        # )
+        return response.choices[0].message.content.strip()
 
-        # answer = response.choices[0].text.strip()
-        # return answer
-    except openai.error.OpenAIError as e:
+    except AuthenticationError:
+        raise Exception("Authentication failed. Please check your OpenAI API key.")
+    except RateLimitError:
+        raise Exception("Rate limit exceeded. Please wait and try again later.")
+    except OpenAIError as e:
         raise Exception(f"OpenAI API error: {e}")
+    except Exception as e:
+        raise Exception(f"An unexpected error occurred: {e}")

@@ -15,8 +15,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 
 # Validate environment variables
 QDRANT_URL = os.getenv("QDRANT_URL")
-QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
-
+# QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+print('QDRANT_URL: %s' % QDRANT_URL)
 # if not QDRANT_URL or not QDRANT_API_KEY:
 if not QDRANT_URL:
     raise EnvironmentError("QDRANT_URL or QDRANT_API_KEY is not set in the environment variables.")
