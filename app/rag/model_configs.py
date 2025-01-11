@@ -14,7 +14,8 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 # Validate environment variables
-QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
+
 # QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 print('QDRANT_URL: %s' % QDRANT_URL)
 # if not QDRANT_URL or not QDRANT_API_KEY:

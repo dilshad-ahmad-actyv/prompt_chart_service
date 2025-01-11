@@ -74,5 +74,5 @@ async def upload_and_read_file(
         logging.error(f"Unexpected error: {e}")
         raise HTTPException(
             status_code=500,
-            detail="An unexpected error occurred during file upload and reading."
+            detail=f"An unexpected error occurred during file upload and reading. error: {e}"
         )

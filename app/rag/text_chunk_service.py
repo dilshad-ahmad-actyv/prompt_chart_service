@@ -1,5 +1,5 @@
 import re
-def split_text_into_chunks(text, max_size=500):
+def split_text_into_chunks(text, max_size=1000):
     """
     Splits a large text chunk into smaller chunks based on sentences, ensuring each chunk
     does not exceed the specified maximum size.
