@@ -48,7 +48,7 @@ async def upload_and_read_file(
         # split the content into chunks
         chunks = split_text_into_chunks(content)
         logging.info(f"Split content into {len(chunks)} chunks.")
-        
+        return chunks
         # convert the chunks into embeddings
         embeddings = text_embed_service(chunks)
         logging.info(f"Generated embeddings for {len(chunks)} chunks.")

@@ -28,8 +28,6 @@ def ensure_collection_exists(client, collection_name, vector_size):
         raise
 
 def retry_upsert(client, collection_name, points, retries=3, delay=5):
-    logging.info('Vectors collection ------------->', points)
-    
     """
     Retry logic for upserting data into Qdrant.
 
@@ -100,12 +98,12 @@ def parallel_upsert(client, collection_name, chunks, embeddings, batch_size=50):
         for i in range(0, len(valid_chunks), batch_size):
             batch_chunks = valid_chunks[i:i + batch_size]
             batch_embeddings = embeddings[i:i + batch_size]
-            unique_id = str(uuid.uuid4())
+            # unique_id = str(uuid.uuid4())
             points = [
                 {
-                    "id": unique_id,
+                    "id": str(uuid.uuid4()),
                     "vector": embedding,
-                    "payload": {"source": f"{unique_id}", "document": chunk},
+                    "payload": {"source": f"{str(uuid.uuid4())}", "document": chunk},
                 }
                 for chunk, embedding in zip(batch_chunks, batch_embeddings)
             ]

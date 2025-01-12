@@ -1,5 +1,6 @@
 import re
-def split_text_into_chunks(text, max_size=1000):
+from services.remove_urls_from_txt import remove_urls_line_by_line
+def split_text_into_chunks(text, max_size=1500):
     """
     Splits a large text chunk into smaller chunks based on sentences, ensuring each chunk
     does not exceed the specified maximum size.
@@ -19,8 +20,10 @@ def split_text_into_chunks(text, max_size=1000):
     if len(text.strip()) == 0:
         return []
     
+ # Remove URLs from text using a helper function
+    cleaned_txt = remove_urls_line_by_line(text)
     # split the text into sentences
-    sentences = re.split(r'(?<=[.!?])\s+', text.strip())
+    sentences = re.split(r'(?<=[.!?])\s+', cleaned_txt.strip())
     
     chunks = []
     current_chunk = ''
