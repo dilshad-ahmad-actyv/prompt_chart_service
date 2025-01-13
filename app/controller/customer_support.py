@@ -3,7 +3,7 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from app.rag.query_service import query_relevant_chunks
-from app.services.openai_service import generate_openai_response
+from app.services.openai_service import generate_response
 from pydantic import BaseModel
 
 router = APIRouter()
@@ -11,8 +11,10 @@ router = APIRouter()
 class ChatbotRequest(BaseModel):
     user_prompt: str
     collection_name: str
+    model: str = "gpt-3.5-turbo"
+    top_k: int = 3
     
-@router.post("/chatbot")
+@router.post("/chat/completions")
 async def chatbot(request: ChatbotRequest):
     """
     Handles the user prompt, queries the Qdrant vector database, and generates a response using OpenAI.
@@ -28,20 +30,23 @@ async def chatbot(request: ChatbotRequest):
         # Extract parameters from the request
         user_prompt = request.user_prompt
         collection_name = request.collection_name
+        model = request.model
+        top_k = request.top_k
 
         # Example response logic (replace with your chatbot implementation)
         print(f"Received prompt: '{user_prompt}' for collection: '{collection_name}'.")
         
         # Query the relevant chunks from the database
-        relevant_chunks = query_relevant_chunks(user_prompt, collection_name)
+        relevant_chunks = query_relevant_chunks(user_prompt, collection_name, top_k)
         print('relevant_chunks-->', relevant_chunks)
+        # return relevant_chunks
         # If no relevant chunks are found, return a response indicating that
         if not relevant_chunks:
             raise HTTPException(status_code=404, detail="No relevant chunks found in the collection.")
 
         # Generate OpenAI response based on the user prompt and relevant chunks
-        response = generate_openai_response(user_prompt, relevant_chunks)
-
+        response = generate_response(user_prompt, relevant_chunks, model)
+        
         # Return the response
         return JSONResponse(
             status_code=200,

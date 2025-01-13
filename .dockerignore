@@ -21,3 +21,4 @@ __pycache__/
 *.md
 *.git
 .git/
+application.log
