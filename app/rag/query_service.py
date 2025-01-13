@@ -24,7 +24,7 @@ try:
 except Exception as e:
     raise RuntimeError(f"Failed to connect to Qdrant: {e}")
 
-def query_relevant_chunks(query, collection_name, top_k=5):
+def query_relevant_chunks(query, collection_name, top_k=3):
     """
     Queries the Qdrant database for the most relevant document chunks.
 
@@ -83,25 +83,3 @@ def query_relevant_chunks(query, collection_name, top_k=5):
     except Exception as e:
         logging.error(f"An unexpected error occurred during query: {e}")
         raise RuntimeError(f"Query failed due to an unexpected error: {e}")
-
-
-# if __name__ == "__main__":
-#     # Example usage
-#     from langchain_community.embeddings import OpenAIEmbeddings
-
-#     # Initialize the embedding model
-#     embedding_model = OpenAIEmbeddings(model="text-embedding-ada-002")
-
-#     # Define the query and collection name
-#     query = "What is natural language processing?"
-#     collection_name = "my_collection"
-
-#     try:
-#         results = query_relevant_chunks(query, collection_name, top_k=5, embedding_model=embedding_model)
-#         for idx, result in enumerate(results, start=1):
-#             print(f"Result {idx}:")
-#             print(f"  Document: {result['document']}")
-#             print(f"  Source: {result['source']}")
-#             print(f"  Score: {result['score']:.4f}")
-#     except Exception as e:
-#         logging.error(f"Error while querying: {e}")

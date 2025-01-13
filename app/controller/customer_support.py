@@ -33,7 +33,7 @@ async def chatbot(request: ChatbotRequest):
         print(f"Received prompt: '{user_prompt}' for collection: '{collection_name}'.")
         
         # Query the relevant chunks from the database
-        relevant_chunks = query_relevant_chunks(user_prompt, collection_name, top_k=5)
+        relevant_chunks = query_relevant_chunks(user_prompt, collection_name)
         print('relevant_chunks-->', relevant_chunks)
         # If no relevant chunks are found, return a response indicating that
         if not relevant_chunks:
