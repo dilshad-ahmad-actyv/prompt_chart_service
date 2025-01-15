@@ -14,7 +14,7 @@ from app.controller.get_prompt_collection import router as get_prompt_collection
 from app.controller.create_collections import router as create_collection
 from app.controller.file_upload import router as create_file_upload
 from app.controller.upload_img_s3 import router as upload_img_s3
-from app.controller.customer_support import router as chatbot_service
+from app.controller.chat_completion import router as chatbot_service
 app = FastAPI()
 
 app.add_middleware(

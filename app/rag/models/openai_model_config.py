@@ -21,9 +21,27 @@ def generate_openai_response(prompt, context, model):
     
     # Prepare the messages for OpenAI Chat API
     messages = [
-        {"role": "system", "content": "You are a knowledgeable assistant. Use the provided context to answer questions accurately."},
-        {"role": "system", "content": f"Context:\n{context}"},
-        {"role": "user", "content": prompt},
+        {
+            "role": "system",
+            "content": (
+                "You are a knowledgeable assistant. Use the provided context to answer questions accurately. "
+                "All responses must be based only on the provided context. Do not infer or use external sources. "
+                "If the information is not present in the Context, state that explicitly. "
+                "If the question is not related to the document context but pertains to greetings, basic and formal conversations, you are allowed to respond appropriately. "
+                "Always maintain 100% accuracy based on the context provided in step-by-step points where applicable."
+            ),
+        },
+        {
+            "role": "system",
+            "content": f"Context:\n{context}",
+        },
+        {
+            "role": "user",
+            "content": (
+                "Using the provided context, answer the following question with step-by-step accuracy:\n"
+                f"{prompt}"
+            ),
+        },
     ]
 
     try:

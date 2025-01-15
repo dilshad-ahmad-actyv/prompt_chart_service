@@ -5,8 +5,12 @@ from fastapi.responses import JSONResponse
 from app.rag.query_service import query_relevant_chunks
 from app.services.openai_service import generate_response
 from pydantic import BaseModel
+import logging
 
 router = APIRouter()
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 class ChatbotRequest(BaseModel):
     user_prompt: str
@@ -16,6 +20,8 @@ class ChatbotRequest(BaseModel):
     
 @router.post("/chat/completions")
 async def chatbot(request: ChatbotRequest):
+    logging.info('request: %s' % request)
+
     """
     Handles the user prompt, queries the Qdrant vector database, and generates a response using OpenAI.
 
@@ -34,11 +40,11 @@ async def chatbot(request: ChatbotRequest):
         top_k = request.top_k
 
         # Example response logic (replace with your chatbot implementation)
-        print(f"Received prompt: '{user_prompt}' for collection: '{collection_name}'.")
+        logging.info(f"Received prompt: '{user_prompt}' for collection: '{collection_name}'.")
         
         # Query the relevant chunks from the database
         relevant_chunks = query_relevant_chunks(user_prompt, collection_name, top_k)
-        print('relevant_chunks-->', relevant_chunks)
+        # print('relevant_chunks-->', relevant_chunks)
         # return relevant_chunks
         # If no relevant chunks are found, return a response indicating that
         if not relevant_chunks:
