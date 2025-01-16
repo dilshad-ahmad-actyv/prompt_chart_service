@@ -16,3 +16,6 @@ pydantic
 fuzzywuzzy[speedup]
 PyPDF2
 python-multipart
+boto3
+langchain_community
+tiktoken

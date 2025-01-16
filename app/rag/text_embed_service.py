@@ -3,6 +3,7 @@ import openai
 from langchain_community.embeddings import OpenAIEmbeddings
 from dotenv import load_dotenv
 import logging
+from openai import AuthenticationError, OpenAIError
 
 # Load environment variables from .env file
 load_dotenv()
@@ -53,19 +54,12 @@ def text_embed_service(chunks):
         embeddings = embedding_model.embed_documents(chunks)
         logging.info("Embedding completed successfully.")
         return embeddings
-    except openai.error.AuthenticationError:
+    except AuthenticationError:
         logging.error("Authentication failed. Check your OpenAI API key.")
         raise RuntimeError("Authentication failed. Ensure your OpenAI API key is valid.")
-    except openai.error.APIError as api_error:
+    except OpenAIError as api_error:
         logging.error(f"API error occurred: {api_error}")
         raise RuntimeError(f"API error occurred: {api_error}")
     except Exception as e:
         logging.error(f"An unexpected error occurred while embedding chunks: {e}")
         raise RuntimeError(f"An unexpected error occurred: {e}")
-
-
-    # try:
-    #     embeddings = embed_chunks(chunks)
-    #     print(f"Generated {len(embeddings)} embeddings.")
-    # except Exception as e:
-    #     print(f"Error: {e}")

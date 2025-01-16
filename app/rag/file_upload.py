@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 # Directory for uploaded files
-UPLOAD_DIR = Path("../../uploads")
+UPLOAD_DIR = Path("../uploads")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)  # Ensure directory exists
 
 
@@ -27,6 +27,7 @@ def upload_file(file) -> str:
 
     # Save the file
     file_path = UPLOAD_DIR / file.filename
+    print('Saving file', file_path)
     with open(file_path, "wb") as f:
         f.write(file.file.read())
 

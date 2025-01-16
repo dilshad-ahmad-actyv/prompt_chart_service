@@ -1,31 +1,31 @@
-import sys
-import os
 import time
 import logging
 import concurrent.futures
-from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-
+import uuid
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-# Validate environment variables
-QDRANT_URL = os.getenv("QDRANT_URL")
-QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
-
-if not QDRANT_URL or not QDRANT_API_KEY:
-    raise EnvironmentError("QDRANT_URL or QDRANT_API_KEY is not set in the environment variables.")
-
-# Configure Qdrant client
-try:
-    client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
-except Exception as e:
-    raise RuntimeError(f"Failed to connect to Qdrant: {e}")
-
+def ensure_collection_exists(client, collection_name, vector_size):
+    """
+    Ensure the collection exists. Create it if it doesn't.
+    
+    Args:
+        client (QdrantClient): Qdrant client instance.
+        collection_name (str): Name of the collection.
+        vector_size (int): Size of the vectors.
+    """
+    try:
+        # Check if the collection exists
+        if collection_name not in [col.name for col in client.get_collections().collections]:
+            logging.info(f"Collection '{collection_name}' does not exist. Creating it.")
+            client.create_collection(
+                collection_name=collection_name,
+                vectors_config=VectorParams(size=vector_size, distance=Distance.COSINE),
+            )
+    except Exception as e:
+        logging.error(f"Failed to ensure collection exists: {e}")
+        raise
 
 def retry_upsert(client, collection_name, points, retries=3, delay=5):
     """
@@ -89,30 +89,23 @@ def parallel_upsert(client, collection_name, chunks, embeddings, batch_size=50):
     if not all(len(embedding) == vector_size for embedding in embeddings):
         raise ValueError("All embeddings must have the same vector size.")
 
-    try:
-        # Recreate the collection
-        logging.info(f"Recreating collection '{collection_name}' with vector size {vector_size}.")
-        client.recreate_collection(
-            collection_name=collection_name,
-            vectors_config=VectorParams(size=vector_size, distance=Distance.COSINE)
-        )
-    except Exception as e:
-        logging.error(f"Failed to recreate collection: {e}")
-        raise
-
+    # Ensure the collection exists
+    ensure_collection_exists(client, collection_name, vector_size)
+    
     # Prepare batches and upsert in parallel
     with concurrent.futures.ThreadPoolExecutor() as executor:
         futures = []
         for i in range(0, len(valid_chunks), batch_size):
             batch_chunks = valid_chunks[i:i + batch_size]
             batch_embeddings = embeddings[i:i + batch_size]
+            # unique_id = str(uuid.uuid4())
             points = [
                 {
-                    "id": i + j,
+                    "id": str(uuid.uuid4()),
                     "vector": embedding,
-                    "payload": {"source": f"chunk_{i + j}", "document": chunk},
+                    "payload": {"source": f"{str(uuid.uuid4())}", "document": chunk},
                 }
-                for j, (chunk, embedding) in enumerate(zip(batch_chunks, batch_embeddings))
+                for chunk, embedding in zip(batch_chunks, batch_embeddings)
             ]
 
             # Submit upsert task for each batch
@@ -127,14 +120,3 @@ def parallel_upsert(client, collection_name, chunks, embeddings, batch_size=50):
                 raise
 
     logging.info("All batches have been upserted successfully.")
-
-
-# if __name__ == "__main__":
-#     # Example usage
-#     chunks = ["This is a test chunk.", "Another example chunk."]
-#     embeddings = [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]]  # Example embeddings
-
-#     try:
-#         parallel_upsert(client, "test_collection", chunks, embeddings, batch_size=1)
-#     except Exception as e:
-#         logging.error(f"Critical error: {e}")
