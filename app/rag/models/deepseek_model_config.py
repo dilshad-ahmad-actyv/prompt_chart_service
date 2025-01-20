@@ -83,7 +83,7 @@ def generate_deepseek_response(prompt, context, model):
     },
     {
         "role": "system",
-        "content": f"Context:\n{{context}}"
+        "content": f"Context:\n{context}"
     },
     {
         "role": "user",
@@ -91,7 +91,7 @@ def generate_deepseek_response(prompt, context, model):
             "First, analyze this user_prompt carefully. Then, using the provided context, "
             "answer the following question step by step, making sure to remain specific and "
             "not add any information that is not explicitly stated:\n\n"
-            f"{{prompt}}"
+            f"{prompt}"
         ),
     },
 ]
