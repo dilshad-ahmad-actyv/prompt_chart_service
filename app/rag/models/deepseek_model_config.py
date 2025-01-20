@@ -46,11 +46,56 @@ def generate_deepseek_response(prompt, context, model):
         logging.error("Invalid prompt: Prompt must be a non-empty string.")
         raise ValueError("Prompt must be a non-empty string.")
 
+    # messages = [
+    #         {
+    #             "role": "system",
+    #             "content": (
+    #                 "You are a knowledgeable assistant. Use the provided context to answer questions accurately. "
+    #                 "All responses must be based only on the provided context. Do not infer or use external sources. "
+    #                 "If the information is not present in the Context, state that explicitly. "
+    #                 "If the question is not related to the document context but pertains to greetings, basic and formal conversations, you are allowed to respond appropriately. "
+    #                 "Always maintain 100% accuracy based on the context provided in step-by-step points where applicable."
+    #             ),
+    #         },
+    #         {
+    #             "role": "system",
+    #             "content": f"Context:\n{context}",
+    #         },
+    #         {
+    #             "role": "user",
+    #             "content": (
+    #                 "Using the provided context, answer the following question with step-by-step accuracy:\n"
+    #                 f"{prompt}"
+    #             ),
+    #         },
+    #     ]
     messages = [
-        {"role": "system", "content": "You are a knowledgeable assistant. Use the provided context to answer questions accurately."},
-        {"role": "system", "content": f"Context:\n{context}"},
-        {"role": "user", "content": prompt},
-    ]
+    {
+        "role": "system",
+        "content": (
+            "You are a knowledgeable assistant. First, carefully read and analyze the user's prompt. "
+            "Then, using only the provided context, provide an answer that is specific to the user prompt. "
+            "All responses must be based strictly on the context. Do not infer or use external sources. "
+            "If the information needed to answer is not found within the context, state that explicitly. "
+            "If the user’s question is not related to the document context but is about greetings or basic/formal conversations, "
+            "respond to it politely and appropriately. Your answers must be 100% accurate based on what the context provides."
+        ),
+    },
+    {
+        "role": "system",
+        "content": f"Context:\n{{context}}"
+    },
+    {
+        "role": "user",
+        "content": (
+            "First, analyze this user_prompt carefully. Then, using the provided context, "
+            "answer the following question step by step, making sure to remain specific and "
+            "not add any information that is not explicitly stated:\n\n"
+            f"{{prompt}}"
+        ),
+    },
+]
+
 
     try:
         response = client.chat.completions.create(
