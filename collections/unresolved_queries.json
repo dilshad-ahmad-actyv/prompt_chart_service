@@ -90,5 +90,17 @@
     {
         "prompt": "what applications are used by Jai",
         "ms_sql": ""
+    },
+    {
+        "prompt": "what is the average AHT of Amit?",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "what is the average AHT of Amit?",
+        "ms_sql": ""
+    },
+    {
+        "prompt": "what is the average AHT of Amit?",
+        "ms_sql": ""
     }
 ]
