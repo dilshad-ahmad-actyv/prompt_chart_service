@@ -9,6 +9,7 @@ from sql_chart.model_config import generate_response
 from sql_chart.fetch_records_from_header import fetch_records_from_header_table
 from sql_chart.query_generator import process_query_and_generate_sql_query
 from utils.query_parser import extract_sql_query
+from sql_chart.fetch_relationship import get_table_relations
 def find_best_match_from_master_table(user_query):
     script_dir = os.path.dirname(os.path.abspath(__file__))  # Folder containing this script
     file_path = os.path.join(script_dir, "table_metadata.json")
@@ -37,14 +38,21 @@ Analyze the table metadata and determine which tables are most relevant to the u
    
     try:
         response = generate_response(user_prompt, system_prompt)
-        response = json.loads(response)
+        """Finds the best matching tables for the user prompt using OpenAI."""
+        tables = json.loads(response)
         
-        tables = fetch_records_from_header_table(response)
-        
-        sql_query_response = process_query_and_generate_sql_query(tables, user_query)
+        headers = fetch_records_from_header_table(tables)
+ 
+        relations = get_table_relations(tables)
+
+        sql_query_response = process_query_and_generate_sql_query(headers, user_query, relations)
         
         sql_query = extract_sql_query(sql_query_response)
-        return sql_query
+        return {
+            "tables": tables,
+            "relations": relations,
+            "sql_query": sql_query
+        }
     except Exception as e:
         print(f"Error during OpenAI API call: {e}")
         return {"best_match": None, "reasoning": "Unable to process the query due to an error."}

@@ -1,0 +1,702 @@
+[
+  {
+    "ForeignKeyName": "FK_AnalyzerUserPerformance_EpiUsers_UserId",
+    "ParentTable": "AnalyzerUserPerformance",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_ApplicationVaults_EpiProjects_ProjectId",
+    "ParentTable": "ApplicationVaults",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+    "ParentTable": "AspNetRoleClaims",
+    "ParentColumn": "RoleId",
+    "ReferencedTable": "AspNetRoles",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_AspNetUserClaims_AspNetUsers_UserId",
+    "ParentTable": "AspNetUserClaims",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "AspNetUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_AspNetUserLogins_AspNetUsers_UserId",
+    "ParentTable": "AspNetUserLogins",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "AspNetUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_AspNetUserRoles_AspNetRoles_RoleId",
+    "ParentTable": "AspNetUserRoles",
+    "ParentColumn": "RoleId",
+    "ReferencedTable": "AspNetRoles",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_AspNetUserRoles_AspNetUsers_UserId",
+    "ParentTable": "AspNetUserRoles",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "AspNetUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_AspNetUsers_EpiUsers_UserId",
+    "ParentTable": "AspNetUsers",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_AspNetUserTokens_AspNetUsers_UserId",
+    "ParentTable": "AspNetUserTokens",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "AspNetUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_BackgroundJobs_EpiProjects_ProjectId",
+    "ParentTable": "BackgroundJobs",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureAgentEventLogs_CaptureAgents_AgentId",
+    "ParentTable": "CaptureAgentEventLogs",
+    "ParentColumn": "AgentId",
+    "ReferencedTable": "CaptureAgents",
+    "ReferencedColumn": "AgentId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureAgents_EpiUsers_UserId",
+    "ParentTable": "CaptureAgents",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureAgents_Machines_MachineId",
+    "ParentTable": "CaptureAgents",
+    "ParentColumn": "MachineId",
+    "ReferencedTable": "Machines",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureAgentStatusEvent_CaptureAgents_CaptureAgentId",
+    "ParentTable": "CaptureAgentStatusEvent",
+    "ParentColumn": "CaptureAgentId",
+    "ReferencedTable": "CaptureAgents",
+    "ReferencedColumn": "AgentId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureJobGroup_CaptureJobs_CaptureJobId",
+    "ParentTable": "CaptureJobGroup",
+    "ParentColumn": "CaptureJobId",
+    "ReferencedTable": "CaptureJobs",
+    "ReferencedColumn": "CaptureJobId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureJobGroup_EpiGroups_GroupId",
+    "ParentTable": "CaptureJobGroup",
+    "ParentColumn": "GroupId",
+    "ReferencedTable": "EpiGroups",
+    "ReferencedColumn": "GroupId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureJobPIGroup_CaptureJobs_CaptureJobId",
+    "ParentTable": "CaptureJobPIGroup",
+    "ParentColumn": "CaptureJobId",
+    "ReferencedTable": "CaptureJobs",
+    "ReferencedColumn": "CaptureJobId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureJobPIGroup_ProcessImprovementUserGroups_PIUserGroupId",
+    "ParentTable": "CaptureJobPIGroup",
+    "ParentColumn": "PIUserGroupId",
+    "ReferencedTable": "ProcessImprovementUserGroups",
+    "ReferencedColumn": "PIUserGroupId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureJobs_CapturePreferences_CapturePreferenceId",
+    "ParentTable": "CaptureJobs",
+    "ParentColumn": "CapturePreferenceId",
+    "ReferencedTable": "CapturePreferences",
+    "ReferencedColumn": "CapturePreferenceId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureJobs_EpiProjects_ProjectId",
+    "ParentTable": "CaptureJobs",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureJobSchedules_CaptureJobs_CaptureJobId",
+    "ParentTable": "CaptureJobSchedules",
+    "ParentColumn": "CaptureJobId",
+    "ReferencedTable": "CaptureJobs",
+    "ReferencedColumn": "CaptureJobId"
+  },
+  {
+    "ForeignKeyName": "FK_CapturePreferenceGroup_CapturePreferences_CapturePreferenceId",
+    "ParentTable": "CapturePreferenceGroup",
+    "ParentColumn": "CapturePreferenceId",
+    "ReferencedTable": "CapturePreferences",
+    "ReferencedColumn": "CapturePreferenceId"
+  },
+  {
+    "ForeignKeyName": "FK_CapturePreferenceGroup_EpiGroups_GroupId",
+    "ParentTable": "CapturePreferenceGroup",
+    "ParentColumn": "GroupId",
+    "ReferencedTable": "EpiGroups",
+    "ReferencedColumn": "GroupId"
+  },
+  {
+    "ForeignKeyName": "FK_CapturePreferences_EpiProjects_ProjectId",
+    "ParentTable": "CapturePreferences",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureResourceGroupMap_CaptureResourceGroups_CaptureResourceGroupId",
+    "ParentTable": "CaptureResourceGroupMap",
+    "ParentColumn": "CaptureResourceGroupId",
+    "ReferencedTable": "CaptureResourceGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureResourceGroupMap_CaptureResources_CaptureResourceId",
+    "ParentTable": "CaptureResourceGroupMap",
+    "ParentColumn": "CaptureResourceId",
+    "ReferencedTable": "CaptureResources",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_CaptureResourceGroups_EpiProjects_ProjectId",
+    "ParentTable": "CaptureResourceGroups",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiGPSFiles_EpiUsers_UserId",
+    "ParentTable": "EpiGPSFiles",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_EpiGPSFiles_ProcessTasks_ProcessTaskId",
+    "ParentTable": "EpiGPSFiles",
+    "ParentColumn": "ProcessTaskId",
+    "ReferencedTable": "ProcessTasks",
+    "ReferencedColumn": "ProcessTaskId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiGroupRole_AspNetRoles_EpiRoleId",
+    "ParentTable": "EpiGroupRole",
+    "ParentColumn": "EpiRoleId",
+    "ReferencedTable": "AspNetRoles",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_EpiGroupRole_EpiGroups_GroupId",
+    "ParentTable": "EpiGroupRole",
+    "ParentColumn": "GroupId",
+    "ReferencedTable": "EpiGroups",
+    "ReferencedColumn": "GroupId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiGroupTask_EpiGroups_GroupId",
+    "ParentTable": "EpiGroupTask",
+    "ParentColumn": "GroupId",
+    "ReferencedTable": "EpiGroups",
+    "ReferencedColumn": "GroupId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiGroupTask_ProcessTasks_ProcessTaskId",
+    "ParentTable": "EpiGroupTask",
+    "ParentColumn": "ProcessTaskId",
+    "ReferencedTable": "ProcessTasks",
+    "ReferencedColumn": "ProcessTaskId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiProjectGroup_EpiGroups_GroupId",
+    "ParentTable": "EpiProjectGroup",
+    "ParentColumn": "GroupId",
+    "ReferencedTable": "EpiGroups",
+    "ReferencedColumn": "GroupId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiProjectGroup_EpiProjects_ProjectId",
+    "ParentTable": "EpiProjectGroup",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiProjectUser_EpiProjects_ProjectId",
+    "ParentTable": "EpiProjectUser",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiProjectUser_EpiUsers_EpiUserId",
+    "ParentTable": "EpiProjectUser",
+    "ParentColumn": "EpiUserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_EpiUserGroup_EpiGroups_GroupId",
+    "ParentTable": "EpiUserGroup",
+    "ParentColumn": "GroupId",
+    "ReferencedTable": "EpiGroups",
+    "ReferencedColumn": "GroupId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiUserGroup_EpiUsers_Id",
+    "ParentTable": "EpiUserGroup",
+    "ParentColumn": "Id",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_EpiUserPIUserGroupMap_EpiUsers_UserId",
+    "ParentTable": "EpiUserPIUserGroupMap",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_EpiUserPIUserGroupMap_ProcessImprovementUserGroups_PIUserGroupId",
+    "ParentTable": "EpiUserPIUserGroupMap",
+    "ParentColumn": "PIUserGroupId",
+    "ReferencedTable": "ProcessImprovementUserGroups",
+    "ReferencedColumn": "PIUserGroupId"
+  },
+  {
+    "ForeignKeyName": "FK_EpiUserRPAUserGroupMap_EpiUsers_UserId",
+    "ParentTable": "EpiUserRPAUserGroupMap",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_EpiUserRPAUserGroupMap_RPAUserGroups_RPAUserGroupId",
+    "ParentTable": "EpiUserRPAUserGroupMap",
+    "ParentColumn": "RPAUserGroupId",
+    "ReferencedTable": "RPAUserGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieBots_EpiUsers_UserId",
+    "ParentTable": "GenieBots",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieBots_Machines_MachineId",
+    "ParentTable": "GenieBots",
+    "ParentColumn": "MachineId",
+    "ReferencedTable": "Machines",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieJobExecutionDetails_EpiUsers_UserId",
+    "ParentTable": "GenieJobExecutionDetails",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieJobExecutionDetails_GenieJobs_GenieJobId",
+    "ParentTable": "GenieJobExecutionDetails",
+    "ParentColumn": "GenieJobId",
+    "ReferencedTable": "GenieJobs",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieJobExecutionDetails_GenieScripts_GenieScriptId",
+    "ParentTable": "GenieJobExecutionDetails",
+    "ParentColumn": "GenieScriptId",
+    "ReferencedTable": "GenieScripts",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieJobExecutionDetails_Machines_MachineId",
+    "ParentTable": "GenieJobExecutionDetails",
+    "ParentColumn": "MachineId",
+    "ReferencedTable": "Machines",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieJobs_GenieScripts_GenieScriptId",
+    "ParentTable": "GenieJobs",
+    "ParentColumn": "GenieScriptId",
+    "ReferencedTable": "GenieScripts",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieJobs_MachineGroups_MachineGroupId",
+    "ParentTable": "GenieJobs",
+    "ParentColumn": "MachineGroupId",
+    "ReferencedTable": "MachineGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieJobs_ProcessTasks_ProcessTaskId",
+    "ParentTable": "GenieJobs",
+    "ParentColumn": "ProcessTaskId",
+    "ReferencedTable": "ProcessTasks",
+    "ReferencedColumn": "ProcessTaskId"
+  },
+  {
+    "ForeignKeyName": "FK_GenieJobs_RPAUserGroups_RPAUserGroupId",
+    "ParentTable": "GenieJobs",
+    "ParentColumn": "RPAUserGroupId",
+    "ReferencedTable": "RPAUserGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieJobSchedules_GenieJobs_GenieJobId",
+    "ParentTable": "GenieJobSchedules",
+    "ParentColumn": "GenieJobId",
+    "ReferencedTable": "GenieJobs",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_GenieScripts_ProcessTasks_ProcessTaskId",
+    "ParentTable": "GenieScripts",
+    "ParentColumn": "ProcessTaskId",
+    "ReferencedTable": "ProcessTasks",
+    "ReferencedColumn": "ProcessTaskId"
+  },
+  {
+    "ForeignKeyName": "FK_GWZFileGUID",
+    "ParentTable": "GwzRawSteps",
+    "ParentColumn": "GWZFileGUID",
+    "ReferencedTable": "RCGWZFiles",
+    "ReferencedColumn": "GWZFileGUID"
+  },
+  {
+    "ForeignKeyName": "FK_JobMachineApplicationVaultMap_ApplicationVaults_ApplicationVaultId",
+    "ParentTable": "JobMachineApplicationVaultMap",
+    "ParentColumn": "ApplicationVaultId",
+    "ReferencedTable": "ApplicationVaults",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobMachineApplicationVaultMap_GenieJobs_GenieJobId",
+    "ParentTable": "JobMachineApplicationVaultMap",
+    "ParentColumn": "GenieJobId",
+    "ReferencedTable": "GenieJobs",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobMachineApplicationVaultMap_MachineGroups_MachineGroupId",
+    "ParentTable": "JobMachineApplicationVaultMap",
+    "ParentColumn": "MachineGroupId",
+    "ReferencedTable": "MachineGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobMachineApplicationVaultMap_Machines_MachineId",
+    "ParentTable": "JobMachineApplicationVaultMap",
+    "ParentColumn": "MachineId",
+    "ReferencedTable": "Machines",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobMachineOSVaultMap_GenieJobs_GenieJobId",
+    "ParentTable": "JobMachineOSVaultMap",
+    "ParentColumn": "GenieJobId",
+    "ReferencedTable": "GenieJobs",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobMachineOSVaultMap_MachineGroups_MachineGroupId",
+    "ParentTable": "JobMachineOSVaultMap",
+    "ParentColumn": "MachineGroupId",
+    "ReferencedTable": "MachineGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobMachineOSVaultMap_Machines_MachineId",
+    "ParentTable": "JobMachineOSVaultMap",
+    "ParentColumn": "MachineId",
+    "ReferencedTable": "Machines",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobMachineOSVaultMap_OSVaults_OSVaultId",
+    "ParentTable": "JobMachineOSVaultMap",
+    "ParentColumn": "OSVaultId",
+    "ReferencedTable": "OSVaults",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobOperationMap_BackgroundJobs_JobId",
+    "ParentTable": "JobOperationMap",
+    "ParentColumn": "JobId",
+    "ReferencedTable": "BackgroundJobs",
+    "ReferencedColumn": "JobId"
+  },
+  {
+    "ForeignKeyName": "FK_JobUserApplicationVaultMap_ApplicationVaults_ApplicationVaultId",
+    "ParentTable": "JobUserApplicationVaultMap",
+    "ParentColumn": "ApplicationVaultId",
+    "ReferencedTable": "ApplicationVaults",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobUserApplicationVaultMap_EpiUsers_UserId",
+    "ParentTable": "JobUserApplicationVaultMap",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobUserApplicationVaultMap_GenieJobs_GenieJobId",
+    "ParentTable": "JobUserApplicationVaultMap",
+    "ParentColumn": "GenieJobId",
+    "ReferencedTable": "GenieJobs",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobUserApplicationVaultMap_RPAUserGroups_RPAUserGroupId",
+    "ParentTable": "JobUserApplicationVaultMap",
+    "ParentColumn": "RPAUserGroupId",
+    "ReferencedTable": "RPAUserGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobUserOSVaultMap_EpiUsers_UserId",
+    "ParentTable": "JobUserOSVaultMap",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobUserOSVaultMap_GenieJobs_GenieJobId",
+    "ParentTable": "JobUserOSVaultMap",
+    "ParentColumn": "GenieJobId",
+    "ReferencedTable": "GenieJobs",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobUserOSVaultMap_OSVaults_OSVaultId",
+    "ParentTable": "JobUserOSVaultMap",
+    "ParentColumn": "OSVaultId",
+    "ReferencedTable": "OSVaults",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_JobUserOSVaultMap_RPAUserGroups_RPAUserGroupId",
+    "ParentTable": "JobUserOSVaultMap",
+    "ParentColumn": "RPAUserGroupId",
+    "ReferencedTable": "RPAUserGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_MachineGroupMap_MachineGroups_MachineGroupId",
+    "ParentTable": "MachineGroupMap",
+    "ParentColumn": "MachineGroupId",
+    "ReferencedTable": "MachineGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_MachineGroupMap_Machines_MachineId",
+    "ParentTable": "MachineGroupMap",
+    "ParentColumn": "MachineId",
+    "ReferencedTable": "Machines",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_ManualActivity_ProcessTasks",
+    "ParentTable": "ManualActivities",
+    "ParentColumn": "ProcessTaskId",
+    "ReferencedTable": "ProcessTasks",
+    "ReferencedColumn": "ProcessTaskId"
+  },
+  {
+    "ForeignKeyName": "FK_ManualActivityEvents_EpiUsers_UserId",
+    "ParentTable": "ManualActivityEvents",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_ManualActivityEvents_ManualActivity",
+    "ParentTable": "ManualActivityEvents",
+    "ParentColumn": "ManualActivityId",
+    "ReferencedTable": "ManualActivities",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_OSVaults_EpiProjects_ProjectId",
+    "ParentTable": "OSVaults",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_PasswordHistorys_AspNetUsers_UserId",
+    "ParentTable": "PasswordHistorys",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "AspNetUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_PIUserGroupTask_ProcessImprovementUserGroups_PIUserGroupId",
+    "ParentTable": "PIUserGroupTask",
+    "ParentColumn": "PIUserGroupId",
+    "ReferencedTable": "ProcessImprovementUserGroups",
+    "ReferencedColumn": "PIUserGroupId"
+  },
+  {
+    "ForeignKeyName": "FK_PIUserGroupTask_ProcessTasks_ProcessTaskId",
+    "ParentTable": "PIUserGroupTask",
+    "ParentColumn": "ProcessTaskId",
+    "ReferencedTable": "ProcessTasks",
+    "ReferencedColumn": "ProcessTaskId"
+  },
+  {
+    "ForeignKeyName": "FK_Processes_EpiProjects_ProjectId",
+    "ParentTable": "Processes",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_Processes_Processes_ParentId",
+    "ParentTable": "Processes",
+    "ParentColumn": "ParentId",
+    "ReferencedTable": "Processes",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_ProcessImprovementUserGroups_EpiProjects_ProjectId",
+    "ParentTable": "ProcessImprovementUserGroups",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_ProcessTasks_EpiProjects_ProjectId",
+    "ParentTable": "ProcessTasks",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_ProcessTasks_Processes_ProcessId",
+    "ParentTable": "ProcessTasks",
+    "ParentColumn": "ProcessId",
+    "ReferencedTable": "Processes",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_CabFiles",
+    "ParentTable": "RCGWZFiles",
+    "ParentColumn": "CabFileID",
+    "ReferencedTable": "RCCabbedGWZFiles",
+    "ReferencedColumn": "CabFileID"
+  },
+  {
+    "ForeignKeyName": "FK_RefreshTokens_AspNetUsers_UserId",
+    "ParentTable": "RefreshTokens",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "AspNetUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_ResourceGroupPIUserGroupMap_CaptureResourceGroups_CaptureResourceGroupId",
+    "ParentTable": "ResourceGroupPIUserGroupMap",
+    "ParentColumn": "CaptureResourceGroupId",
+    "ReferencedTable": "CaptureResourceGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_ResourceGroupPIUserGroupMap_ProcessImprovementUserGroups_PIUserGroupId",
+    "ParentTable": "ResourceGroupPIUserGroupMap",
+    "ParentColumn": "PIUserGroupId",
+    "ReferencedTable": "ProcessImprovementUserGroups",
+    "ReferencedColumn": "PIUserGroupId"
+  },
+  {
+    "ForeignKeyName": "FK_ResourceGroupUserGroupMap_CaptureResourceGroups_CaptureResourceGroupId",
+    "ParentTable": "ResourceGroupUserGroupMap",
+    "ParentColumn": "CaptureResourceGroupId",
+    "ReferencedTable": "CaptureResourceGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_ResourceGroupUserGroupMap_EpiGroups_EpiGroupGroupId",
+    "ParentTable": "ResourceGroupUserGroupMap",
+    "ParentColumn": "EpiGroupGroupId",
+    "ReferencedTable": "EpiGroups",
+    "ReferencedColumn": "GroupId"
+  },
+  {
+    "ForeignKeyName": "FK_ResourceGroupUserMap_CaptureResourceGroups_CaptureResourceGroupId",
+    "ParentTable": "ResourceGroupUserMap",
+    "ParentColumn": "CaptureResourceGroupId",
+    "ReferencedTable": "CaptureResourceGroups",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_ResourceGroupUserMap_EpiUsers_UserId",
+    "ParentTable": "ResourceGroupUserMap",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "FK_RPAUserGroups_EpiProjects_ProjectId",
+    "ParentTable": "RPAUserGroups",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "FK_Schedules_EpiProjects_ProjectId",
+    "ParentTable": "Schedules",
+    "ParentColumn": "ProjectId",
+    "ReferencedTable": "EpiProjects",
+    "ReferencedColumn": "ProjectId"
+  },
+  {
+    "ForeignKeyName": "wfk_GpsLog_EpiUsers",
+    "ParentTable": "GpsLog",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "wfk_ProcessMetrices_EpiUsers",
+    "ParentTable": "ProcessMetrices",
+    "ParentColumn": "UserId",
+    "ReferencedTable": "EpiUsers",
+    "ReferencedColumn": "Id"
+  },
+  {
+    "ForeignKeyName": "wfk_ProcessMetrices_ProcessTasks",
+    "ParentTable": "ProcessMetrices",
+    "ParentColumn": "ProcessTaskId",
+    "ReferencedTable": "ProcessTasks",
+    "ReferencedColumn": "ProcessTaskId"
+  }
+]

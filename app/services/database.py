@@ -1,12 +1,72 @@
 import pyodbc
 from config.settings import DATABASE_CONFIG
 import datetime
+from dotenv import load_dotenv
+import os
+import json
+load_dotenv()
+
+# SERVER = os.getenv('SERVER')
+# DATABASE = os.getenv('DATABASE')
+# DATABASE_CONFIG = {
+#     'DRIVER': '{ODBC Driver 17 for SQL Server}',
+#     'SERVER': SERVER,
+#     'DATABASE': DATABASE,
+#     'Trusted_Connection': 'yes',
+#     'TrustServerCertificate': 'yes',
+# }
 
 def get_database_connection():
     conn_str = ";".join(f"{key}={value}" for key,
                         value in DATABASE_CONFIG.items())
     return pyodbc.connect(conn_str)
 
+def get_database_schema_relationships():
+    conn = get_database_connection()
+    cursor = conn.cursor()
+    query = """
+        SELECT 
+    fk.name AS ForeignKeyName,
+    tp.name AS ParentTable,
+    cp.name AS ParentColumn,
+    tr.name AS ReferencedTable,
+    cr.name AS ReferencedColumn
+FROM 
+    sys.foreign_keys AS fk
+INNER JOIN 
+    sys.foreign_key_columns AS fkc ON fk.object_id = fkc.constraint_object_id
+INNER JOIN 
+    sys.tables AS tp ON fk.parent_object_id = tp.object_id
+INNER JOIN 
+    sys.columns AS cp ON fkc.parent_column_id = cp.column_id AND tp.object_id = cp.object_id
+INNER JOIN 
+    sys.tables AS tr ON fk.referenced_object_id = tr.object_id
+INNER JOIN 
+    sys.columns AS cr ON fkc.referenced_column_id = cr.column_id AND tr.object_id = cr.object_id
+ORDER BY 
+    tp.name, fk.name;
+    """
+    cursor.execute(query)
+    schema = cursor.fetchall()
+    conn.close()
+    # print(schema)
+
+        # Organize the schema into a dictionary
+    schema_dict = []
+    for row in schema:
+        schema_dict.append({
+            "ForeignKeyName": row[0],
+            "ParentTable": row[1],
+            "ParentColumn": row[2],
+            "ReferencedTable": row[3],
+            "ReferencedColumn": row[4]
+        })
+        print(schema_dict)
+    
+    with open('table_relationships.json', 'w') as f:
+        json.dump(schema_dict, f, indent=4)
+    # Organize schema as a dictionary
+    print("Database schema relationships saved to 'database_schema_relationships.json'")
 
 def get_database_schema():
     conn = get_database_connection()
