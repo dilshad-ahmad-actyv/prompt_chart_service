@@ -37,7 +37,8 @@ Based on the following user query, analyze the context and generate a precise SQ
 4. Use table relationships (e.g., JOINs) only if the user's query requires it or if relationships are implied by the data.
 5. Generate a valid SQL query specifically for MSSQL that satisfies the user's intent.
 
-**Response Format:** The output must only contain the SQL query, without any additional explanations or comments.
+**Response Format:**
+The output must only contain the SQL query, without any additional explanations or comments.
 """
     
     response = generate_response(system_prompt, user_prompt)
