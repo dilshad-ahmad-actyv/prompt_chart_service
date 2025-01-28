@@ -4,7 +4,7 @@ import json
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from sql_chart.model_config import generate_response
 
-def process_query_and_generate_sql_query(headers, user_query, relations):
+def process_query_and_generate_sql_query(headers, user_query, relations, model):
     system_prompt = (
         "You are an expert in generating MSSQL queries. Your task is to analyze the user prompt, provided Context Data, "
         "and the table relationships. Generate an accurate SQL query that aligns with MSSQL syntax. "
@@ -41,5 +41,5 @@ Based on the following user query, analyze the context and generate a precise SQ
 The output must only contain the SQL query, without any additional explanations or comments.
 """
     
-    response = generate_response(system_prompt, user_prompt)
+    response = generate_response(system_prompt, user_prompt, model)
     return response

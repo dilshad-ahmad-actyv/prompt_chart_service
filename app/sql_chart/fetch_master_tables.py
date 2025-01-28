@@ -10,7 +10,9 @@ from sql_chart.fetch_records_from_header import fetch_records_from_header_table
 from sql_chart.query_generator import process_query_and_generate_sql_query
 from utils.query_parser import extract_sql_query
 from sql_chart.fetch_relationship import get_table_relations
-def find_best_match_from_master_table(user_query):
+from app.services.database import fetch_data
+from app.sql_chart.summary_generator import generate_summary
+def find_best_match_from_master_table(user_query, model):
     script_dir = os.path.dirname(os.path.abspath(__file__))  # Folder containing this script
     file_path = os.path.join(script_dir, "table_metadata.json")
 # Load master_output.json and prepare text data
@@ -37,21 +39,32 @@ Analyze the table metadata and determine which tables are most relevant to the u
 """
    
     try:
-        response = generate_response(user_prompt, system_prompt)
+        response = generate_response(user_prompt, system_prompt, model)
         """Finds the best matching tables for the user prompt using OpenAI."""
+
         tables = json.loads(response)
         
         headers = fetch_records_from_header_table(tables)
  
         relations = get_table_relations(tables)
 
-        sql_query_response = process_query_and_generate_sql_query(headers, user_query, relations)
+        sql_query_response = process_query_and_generate_sql_query(headers, user_query, relations, model)
         
         sql_query = extract_sql_query(sql_query_response)
+        
+        data = fetch_data(sql_query)
+        print('data------------>', data)
+        summary = generate_summary(data, user_query, model)
+        print('summary------------>', summary)
+
         return {
+            "success": True,
             "tables": tables,
+            "headers": headers,
             "relations": relations,
-            "sql_query": sql_query
+            "sql_query": sql_query,
+            "data": data,
+            "summary": summary
         }
     except Exception as e:
         print(f"Error during OpenAI API call: {e}")

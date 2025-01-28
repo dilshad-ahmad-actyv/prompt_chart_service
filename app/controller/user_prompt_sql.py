@@ -16,13 +16,14 @@ unresolved_file_path = os.path.join(os.path.dirname(__file__), '../../collection
 
 class Prompt(BaseModel):
     query: str
+    model: str
 @router.post("/prompts/sql-query-prompt")
 async def process_prompt(prompt: Prompt):
     """
     Process a user query prompt and return the generated SQL and fetched data.
     """
     try:
-        extracted_tables = find_best_match_from_master_table(prompt.query)
+        extracted_tables = find_best_match_from_master_table(prompt.query, prompt.model)
         print('extracted tables: ', extracted_tables)
         return extracted_tables
     except Exception as e:
