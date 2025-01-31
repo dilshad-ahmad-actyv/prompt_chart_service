@@ -53,9 +53,9 @@ Analyze the table metadata and determine which tables are most relevant to the u
         sql_query = extract_sql_query(sql_query_response)
         
         data = fetch_data(sql_query)
-        print('data------------>', data)
+        # print('data------------>', data)
         summary = generate_summary(data, user_query, model)
-        print('summary------------>', summary)
+        # print('summary------------>', summary)
 
         return {
             "success": True,

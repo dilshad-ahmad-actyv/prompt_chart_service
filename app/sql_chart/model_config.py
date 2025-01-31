@@ -62,7 +62,7 @@ def generate_response(prompt, system_prompt, model="deepseek-chat"):
     ]
 
     try:
-        if model in ["gpt-3.5-turbo", "gpt-4"]:
+        if model in ["gpt-3.5-turbo", "gpt-4", "gpt-4o-mini"]:
             client = OpenAI(api_key=OPENAI_API_KEY)
             response = client.chat.completions.create(
                 model=model,  # Use OpenAI's model
@@ -70,7 +70,7 @@ def generate_response(prompt, system_prompt, model="deepseek-chat"):
                 stream=False,
                 temperature=0
             )
-        elif model == "deepseek-chat":
+        elif model in ["deepseek-chat", "deepseek-reasoner"]:
             try:
                 client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url=DEEPSEEK_BASE_URL)
             except Exception as e:

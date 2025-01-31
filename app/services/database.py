@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 import json
 load_dotenv()
+import decimal
 
 # SERVER = os.getenv('SERVER')
 # DATABASE = os.getenv('DATABASE')
@@ -185,10 +186,26 @@ def fetch_data(query):
         # Fetch column names
         columns = [desc[0] for desc in cursor.description]
 
-        # Convert rows to a list of dictionaries
-        results = [dict(zip(columns, row)) for row in rows]
+        # # Convert rows to a list of dictionaries
+        # results = [dict(zip(columns, row)) for row in rows]
 
-        print('results', results)
+        # print('results', results)
+        # return results
+                # Convert rows to a list of dictionaries
+        results = []
+        for row in rows:
+            row_dict = {}
+            for col_name, value in zip(columns, row):
+                # If it's a datetime, convert to string (or ISO format)
+                if isinstance(value, datetime.datetime):
+                    row_dict[col_name] = value.isoformat()
+                 # Convert Decimal to float (or str if you prefer)
+                elif isinstance(value, decimal.Decimal):
+                    row_dict[col_name] = float(value)
+                else:
+                    row_dict[col_name] = value
+            results.append(row_dict)
+
         return results
 
     except pyodbc.Error as e:
