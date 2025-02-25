@@ -62,13 +62,13 @@ def generate_response(prompt, system_prompt, model="deepseek-chat"):
     ]
 
     try:
-        if model in ["gpt-3.5-turbo", "gpt-4", "gpt-4o-mini"]:
+        if model in ["gpt-3.5-turbo", "gpt-4", "gpt-4o-mini", "o3-mini"]:
             client = OpenAI(api_key=OPENAI_API_KEY)
             response = client.chat.completions.create(
                 model=model,  # Use OpenAI's model
                 messages=messages,
-                stream=False,
-                temperature=0
+                # stream=False,
+                # temperature=0
             )
         elif model in ["deepseek-chat", "deepseek-reasoner"]:
             try:
